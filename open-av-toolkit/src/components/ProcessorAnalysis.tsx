@@ -30,14 +30,14 @@ backupEnabled,
 const loading =
 Number(processorLoading);
 
-return ( <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-xl">
+return ( <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-xl hover:border-zinc-700 transition-all">
 
 ```
   <h2 className="text-xl font-semibold mb-6">
     Processor Analysis
   </h2>
 
-  <div className="space-y-4">
+<div className="grid grid-cols-2 gap-4">
 
     <div className="flex justify-between">
       <span className="text-zinc-400">
@@ -91,39 +91,7 @@ return ( <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shad
       </span>
     </div>
 
-    <div className="pt-4">
-
-      <div className="flex justify-between mb-2">
-        <span>
-          Processor Loading
-        </span>
-
-        <span>
-          {processorLoading}%
-        </span>
-      </div>
-
-      <div className="w-full h-3 bg-zinc-800 rounded-full overflow-hidden">
-
-        <div
-          className={`h-full ${
-            loading > 90
-              ? "bg-red-500"
-              : loading > 70
-              ? "bg-yellow-500"
-              : "bg-green-500"
-          }`}
-          style={{
-            width: `${Math.min(
-              loading,
-              100
-            )}%`,
-          }}
-        />
-
-      </div>
-
-    </div>
+  
 
     <div className="flex justify-between pt-4">
       <span className="text-zinc-400">
@@ -145,11 +113,6 @@ return ( <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shad
       </span>
     </div>
 
-    <div className="pt-6">
-
-      <h3 className="font-semibold mb-3">
-        Processor Outputs
-      </h3>
 
       <div className="grid gap-4">
 
@@ -220,7 +183,6 @@ return ( <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shad
 
     </div>
 
-    <div className="mt-6">
 
       <span
         className={`px-3 py-2 rounded-lg text-sm ${
@@ -236,9 +198,9 @@ return ( <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shad
 
     </div>
 
-  </div>
 
-</div>
+
+
 
 );
 }

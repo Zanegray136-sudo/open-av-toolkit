@@ -9,8 +9,8 @@ import ProcessorAnalysis from "./components/ProcessorAnalysis";
 import RoutingControls from "./components/RoutingControls";
 import DataRoutingMap from "./components/DataRoutingMap";
 import PatchSheet from "./components/PatchSheet";
-import PortLoading from "./components/PortLoading";
 import ProcessorOutputs from "./components/ProcessorOutputs";
+import ProjectDetails from "./components/ProjectDetails";
 
 function App() {
 const [manufacturer, setManufacturer] =
@@ -42,6 +42,18 @@ useState("standard");
 
 const [redundancy, setRedundancy] =
 useState("primary");
+
+const [projectName, setProjectName] =
+  useState("");
+
+const [client, setClient] =
+  useState("");
+
+const [venue, setVenue] =
+  useState("");
+
+const [engineer, setEngineer] =
+  useState("");
 
 const manufacturers = [
 ...new Set(
@@ -164,10 +176,15 @@ return [];
 
 const map = [];
 
-const columnsPerPort =
+const totalCabinets =
+  wide * high;
+
+const cabinetsPerPort =
   Math.ceil(
-    wide / portsRequired
+    totalCabinets /
+      portsRequired
   );
+
 
 for (
   let row = 0;
@@ -181,15 +198,17 @@ for (
     col < wide;
     col++
   ) {
-    const port =
-      Math.min(
-        Math.floor(
-          col /
-            columnsPerPort
-        ) + 1,
-        portsRequired
-      );
+    const cabinetIndex =
+  row * wide + col;
 
+const port =
+  Math.min(
+    Math.floor(
+      cabinetIndex /
+        cabinetsPerPort
+    ) + 1,
+    portsRequired
+  );
     let arrow = "→";
 
     if (
@@ -276,7 +295,18 @@ return (
     <main className="p-8">
 
   <div className="grid gap-6 xl:grid-cols-3">
-
+<div>
+  <ProjectDetails
+    projectName={projectName}
+    setProjectName={setProjectName}
+    client={client}
+    setClient={setClient}
+    venue={venue}
+    setVenue={setVenue}
+    engineer={engineer}
+    setEngineer={setEngineer}
+  />
+</div>
     <div>
       <ScreenSetup
         manufacturer={manufacturer}
@@ -314,14 +344,6 @@ return (
     />
   </div>
 
-  <div className="xl:col-span-2">
-    <PortLoading
-      portsRequired={portsRequired}
-      processorLoading={
-        processorLoading
-      }
-    />
-  </div>
 
 <div className="xl:col-span-2">
   <ProcessorOutputs

@@ -49,7 +49,7 @@ export default function DataRoutingMap({
   };
 
   return (
-    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-xl">
+    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 shadow-xl hover:border-zinc-700 transition-all">
 
       <div className="flex justify-between items-center mb-6">
 
@@ -138,16 +138,21 @@ export default function DataRoutingMap({
                 ) => (
                   <div
                     key={colIndex}
-                    className="w-20 h-20 rounded flex flex-col items-center justify-center text-xs border-2"
+                    className="w-24 h-24 rounded-xl flex flex-col items-center justify-center text-xs border-2 bg-zinc-950"
                     style={{
-                      borderColor:
-                        portColours[
-                          (cell.port - 1) %
-                            portColours.length
-                        ],
-                    }}
+  borderColor:
+    portColours[
+      (cell.port - 1) %
+        portColours.length
+    ],
+  backgroundColor:
+    `${portColours[
+      (cell.port - 1) %
+        portColours.length
+    ]}22`,
+}}
                   >
-                    <div className="font-bold">
+                    <div className="font-bold text-white text-sm">
                       #
                       {String(
                         getCabinetNumber(
@@ -161,7 +166,7 @@ export default function DataRoutingMap({
                       )}
                     </div>
 
-                 <div className="text-green-400 font-semibold">
+                 <div className="font-semibold">
   P{cell.port}
 </div>
 
@@ -171,7 +176,7 @@ export default function DataRoutingMap({
   </div>
 )}
 
-<div>
+<div className="text-zinc-500 text-lg">
   {cell.direction}
 </div>
                   </div>
